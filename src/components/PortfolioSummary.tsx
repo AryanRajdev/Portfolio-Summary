@@ -105,15 +105,14 @@ const PortfolioSummary = () => {
         }
     }
 
-    if (loading) {
-        return (
-            <div className='loading-container'>
-                <div className='spinner'>
-                    <p>Loading Portfolio...</p>
-                </div>
-            </div>
-        )
-    }
+   if (loading) {
+    return (
+      <div className="loading-container">
+        <div className="spinner"></div>
+        <p>Loading portfolio...</p>
+      </div>
+    )
+  }
 
     if (error) {
         return (
