@@ -16,7 +16,7 @@ A high-performance React + TypeScript web application that displays a large port
 ### 1. Clone the Repository
 
 ``` bash
-git clone https://github.com/your-username/your-project.git
+git clone https://github.com/AryanRajdev/Portfolio-Summary
 
 ```
 
