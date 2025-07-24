@@ -27,7 +27,7 @@ export default function PortfolioChart({ data }: PortfolioChartProps) {
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="symbol" />
+          <XAxis dataKey="symbol"/>
           <YAxis tickFormatter={(value) => (`$${(value / 1000).toFixed(0)}K`)} />
           <Tooltip formatter={(value: number) => [
             `$${value.toLocaleString("en-US", {
