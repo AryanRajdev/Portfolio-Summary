@@ -27,8 +27,9 @@ const PortfolioSummary = () => {
     const [searchTerm, setSearchTerm] = useState(""); // Debounce value
     const [sortField, setSortField] = useState<SortField>("symbol");
     const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
-    const [chartData, setChartData] = useState<EnhancedPortfolioItem[]>([]);
-    const [chartLoading, setChartLoading] = useState(false);
+
+    // const [chartData, setChartData] = useState<EnhancedPortfolioItem[]>([]);
+    // const [chartLoading, setChartLoading] = useState(false);
 
 
     // Pagination states
@@ -105,6 +106,7 @@ const PortfolioSummary = () => {
 
     // Using the worker to process chart data
 
+    /*
     useEffect(() => {
         setChartLoading(true);
         const worker = new ChartWorker();
@@ -117,11 +119,9 @@ const PortfolioSummary = () => {
             worker.terminate(); // Clean up after done
         };
 
-        return () => {
-            worker.terminate(); // Clean up on unmount or rerun
-        };
     }, [processData]);
-    
+
+    */
 
     // Paginated data
     const paginatedData = useMemo(() => {
@@ -166,12 +166,13 @@ const PortfolioSummary = () => {
             {/* Chart Section */}
             <div className='chart-section'>
                 <h2>Portfolio Values</h2>
-                {chartLoading ? (
-                    <div className="chart-loader">Updating chart...</div>
-                ) : (
+
+                {processData.length > 0 ? (
                     <Suspense fallback={<div>Loading chart...</div>}>
-                        <PortfolioChart data={chartData} />
+                        <PortfolioChart data={processData.slice(0, 1000)} />
                     </Suspense>
+                ) : (
+                    <div className="no-data">No data available for chart</div>
                 )}
             </div>
 
@@ -227,11 +228,7 @@ const PortfolioSummary = () => {
                                 <td>{"$" + item.avgPrice.toFixed(2)}</td>
                                 <td>{"$" + item.currentPrice.toFixed(2)}</td>
                                 <td className="total-value">
-                                    {"$" +
-                                        item.totalValue.toLocaleString("en-US", {
-                                            minimumFractionDigits: 2,
-                                            maximumFractionDigits: 2,
-                                        })}
+                                    {"$" + item.totalValue.toLocaleString()}
                                 </td>
                                 <td
                                     className={`pl-cell ${item.plPercentage >= 0 ? "positive" : "negative"
